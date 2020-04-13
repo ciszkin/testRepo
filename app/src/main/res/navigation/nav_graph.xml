@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/estimatesFragment">
+    <fragment
+        android:id="@+id/estimatesFragment"
+        android:name="by.ciszkin.basicapp.ui.EstimatesFragment"
+        android:label="fragment_estimates"
+        tools:layout="@layout/fragment_estimates" >
+        <action
+            android:id="@+id/action_estimatesFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
+        <action
+            android:id="@+id/action_estimatesFragment_to_resourcesFragment"
+            app:destination="@id/resourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="by.ciszkin.basicapp.ui.JobsFragment"
+        android:label="fragment_jobs"
+        tools:layout="@layout/fragment_jobs" >
+        <action
+            android:id="@+id/to_estimatesFragment"
+            app:destination="@id/estimatesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resourcesFragment"
+        android:name="by.ciszkin.basicapp.ui.ResourcesFragment"
+        android:label="fragment_resources"
+        tools:layout="@layout/fragment_resources" >
+        <action
+            android:id="@+id/to_estimatesFragment"
+            app:destination="@id/estimatesFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="by.ciszkin.basicapp.ui.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main"
+        />
+</navigation>

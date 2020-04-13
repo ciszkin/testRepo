@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="by.ciszkin.basicapp.ui.MainActivity">
+    <item
+        android:id="@+id/actionEstimates"
+        android:orderInCategory="100"
+        android:title="@string/estimates_menu_item_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionJobs"
+        android:orderInCategory="100"
+        android:title="@string/jobs_menu_item_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionResources"
+        android:orderInCategory="100"
+        android:title="@string/resources_menu_item_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionSettings"
+        android:orderInCategory="100"
+        android:title="@string/settings_menu_item_title"
+        app:showAsAction="never" />
+</menu>

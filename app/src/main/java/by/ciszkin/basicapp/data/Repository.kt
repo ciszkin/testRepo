@@ -52,7 +52,7 @@ object Repository {
     }
 
     private suspend fun downloadJobs(context: Context) {
-        val jobsListResponse = NetworkService.getBackendlessApi().getJobsList(100).await()
+        val jobsListResponse = NetworkService.getBackendlessApi().getJobsListAsync(100).await()
         if (jobsListResponse.isSuccessful) {
             AppDatabase(context).getJobDao()
                 .addJobs(Mappers.mapNetToDbJob(jobsListResponse.body()))
@@ -62,7 +62,7 @@ object Repository {
 
     private suspend fun downloadResources(context: Context) {
         val resourcesListResponse =
-            NetworkService.getBackendlessApi().getResourcesList(100).await()
+            NetworkService.getBackendlessApi().getResourcesListAsync(100).await()
         if (resourcesListResponse.isSuccessful) {
             AppDatabase(context).getResourceDao()
                 .addResources(Mappers.mapNetToDbResource(resourcesListResponse.body()))

@@ -1,58 +1,112 @@
 package by.ciszkin.basicapp.data
 
 import android.content.Context
+import by.ciszkin.basicapp.R
 import by.ciszkin.basicapp.data.db.AppDatabase
-import by.ciszkin.basicapp.data.db.entity.Job
-import by.ciszkin.basicapp.data.db.entity.Resource
-//import by.ciszkin.basicapp.data.mappers.Mappers
+import by.ciszkin.basicapp.data.db.entity.DbEstimate
+import by.ciszkin.basicapp.data.db.entity.DbJob
+import by.ciszkin.basicapp.data.db.entity.DbResource
 import by.ciszkin.basicapp.data.networking.NetworkService
-import by.ciszkin.basicapp.data.networking.responses.JobResponse
-import by.ciszkin.basicapp.data.networking.responses.ResourceResponse
-import by.ciszkin.basicapp.model.EstimateJob
-import by.ciszkin.basicapp.model.EstimateResource
+import by.ciszkin.basicapp.data.util.Mappers
+import by.ciszkin.basicapp.model.Estimate
+import by.ciszkin.basicapp.model.EstimateRepository
+import by.ciszkin.basicapp.model.RawJob
+import by.ciszkin.basicapp.model.RawResource
 import by.ciszkin.basicapp.model.enums.JobSurface
 import by.ciszkin.basicapp.model.enums.JobType
 import by.ciszkin.basicapp.model.enums.ResType
 import by.ciszkin.basicapp.model.enums.Units
 import kotlinx.coroutines.*
-import java.lang.StringBuilder
 
-object Repository {
+object Repository : EstimateRepository{
 
-    val EMPTY_RESOURCE = EstimateResource("000000-resource", "Empty resource", ResType.MATERIAL, Units.PIECE, 0.0)
-    val EMPTY_JOB = EstimateJob("000000-job", "Empty job", listOf(Pair(EMPTY_RESOURCE, 0.0)), JobSurface.ALL, JobType.OTHER, listOf("Empty"), 0.0)
+    val EMPTY_RESOURCE =
+        RawResource(
+            "000000-resource",
+            "Empty resource",
+            ResType.MATERIAL,
+            Units.PIECE,
+            0.0
+        )
+    val EMPTY_JOB = RawJob(
+        "000000-job",
+        "Empty job",
+        listOf(Pair(EMPTY_RESOURCE, 0.0)),
+        JobSurface.ALL,
+        JobType.OTHER,
+        Units.PIECE,
+        listOf("Empty"),
+        0.0
+    )
 
-    var jobs = ArrayList<EstimateJob>()
-    var resources = ArrayList<EstimateResource>()
+    private var resources = ArrayList<RawResource>()
+    private var jobs = ArrayList<RawJob>()
+    private var estimates = ArrayList<Estimate>()
 
-    private var dBJobs = ArrayList<Job>()
-    private var dBResources = ArrayList<Resource>()
+    private var dBResources = ArrayList<DbResource>()
+    private var dBJobs = ArrayList<DbJob>()
+    private var dBEstimates = ArrayList<DbEstimate>()
 
-    private var resourcesLoading: kotlinx.coroutines.Job? = null
-    private var jobsLoading: kotlinx.coroutines.Job? = null
+    private var resourcesLoading: Job? = null
+    private var jobsLoading: Job? = null
+    private var estimatesLoading: Job? = null
 
-    fun loadData(context: Context) = CoroutineScope(Dispatchers.IO).async {
+    override fun getRawResources() = resources
 
-        resourcesLoading = loadResourcesFromDb(context)
-        jobsLoading = loadJobsFromDb(context)
+    override fun getRawJobs() = jobs
 
-        resourcesLoading?.join()
-        jobsLoading?.join()
+    override fun getEstimates() = estimates
 
-        if (dBResources.isEmpty()) downloadResources(context)
-        if (dBJobs.isEmpty()) downloadJobs(context)
+    override fun saveEstimates(context: Context, estimates: List<Estimate>) {
+        AppDatabase(context).getEstimateDao()
+            .addEstimates(Mappers.mapEstimateToDbEstimate(estimates))
+    }
 
-        if (resourcesLoading?.isActive == true) resourcesLoading?.join()
-        if (jobsLoading?.isActive == true) jobsLoading?.join()
+    override fun loadDataAsync(context: Context) = CoroutineScope(Dispatchers.IO).async {
 
-        resources = Mappers.mapDbToEstimateResource(dBResources) as ArrayList<EstimateResource>
-        jobs = Mappers.mapDbToEstimateJob(dBJobs) as ArrayList<EstimateJob>
+        if (resources.isEmpty()) {
+            val dbResCount = AppDatabase(context).getResourceDao().getResourcesCount()
+            val netResCount =
+                NetworkService.getAnonymousBackendlessApi().getResourcesCountAsync().await()
+
+            if (dbResCount < netResCount) {
+                downloadResources(context)
+            } else {
+                resourcesLoading = loadResourcesFromDb(context)
+            }
+
+            resourcesLoading?.join()
+            resources = Mappers.mapDbToRawResource(dBResources) as ArrayList<RawResource>
+        }
+
+        if (jobs.isEmpty()) {
+            val dbJobCount = AppDatabase(context).getJobDao().getJobsCount()
+            val netJobCount = NetworkService.getAnonymousBackendlessApi().getJobsCountAsync().await()
+
+            if (dbJobCount < netJobCount) {
+                downloadJobs(context)
+            } else {
+                jobsLoading = loadJobsFromDb(context)
+            }
+
+            jobsLoading?.join()
+            jobs = Mappers.mapDbToRawJob(dBJobs) as ArrayList<RawJob>
+        }
+
+        estimatesLoading = loadEstimatesFromDb(context)
+        estimatesLoading?.join()
+        estimates = Mappers.mapDbEstimateToEstimate(dBEstimates) as ArrayList<Estimate>
 
         return@async jobs.isNotEmpty() && resources.isNotEmpty()
     }
 
     private suspend fun downloadJobs(context: Context) {
-        val jobsListResponse = NetworkService.getBackendlessApi().getJobsListAsync(100).await()
+        val sharedPref = context.getSharedPreferences(
+            context.getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        )
+        val userToken = sharedPref.getString(context.getString(R.string.user_token), "")
+        val jobsListResponse = NetworkService.getBackendlessApi(userToken!!).getJobsListAsync(100).await()
         if (jobsListResponse.isSuccessful) {
             AppDatabase(context).getJobDao()
                 .addJobs(Mappers.mapNetToDbJob(jobsListResponse.body()))
@@ -61,8 +115,13 @@ object Repository {
     }
 
     private suspend fun downloadResources(context: Context) {
+        val sharedPref = context.getSharedPreferences(
+            context.getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        )
+        val userToken = sharedPref.getString(context.getString(R.string.user_token), "")
         val resourcesListResponse =
-            NetworkService.getBackendlessApi().getResourcesListAsync(100).await()
+            NetworkService.getBackendlessApi(userToken!!).getResourcesListAsync(100).await()
         if (resourcesListResponse.isSuccessful) {
             AppDatabase(context).getResourceDao()
                 .addResources(Mappers.mapNetToDbResource(resourcesListResponse.body()))
@@ -70,19 +129,20 @@ object Repository {
         }
     }
 
-    fun getJobByID(id: String): EstimateJob {
-        var result: EstimateJob = EMPTY_JOB
+    override fun getJobById(id: String): RawJob {
+        var result: RawJob = EMPTY_JOB
         jobs.forEach {
             if (id == it.objectId) {
                 result = it
                 return@forEach
             }
         }
+
         return result
     }
 
-    fun getResourceByID(id: String): EstimateResource {
-        var result: EstimateResource = EMPTY_RESOURCE
+    override fun getResourceById(id: String): RawResource {
+        var result: RawResource = EMPTY_RESOURCE
         resources.forEach {
             if (id == it.objectId) {
                 result = it
@@ -93,153 +153,15 @@ object Repository {
     }
 
     private fun loadJobsFromDb(context: Context) = CoroutineScope(Dispatchers.IO).launch {
-        dBJobs = AppDatabase(context).getJobDao().getJobs() as ArrayList<Job>
+        dBJobs = AppDatabase(context).getJobDao().getJobs() as ArrayList<DbJob>
     }
 
     private fun loadResourcesFromDb(context: Context) = CoroutineScope(Dispatchers.IO).launch {
         dBResources =
-            AppDatabase(context).getResourceDao().getResources() as ArrayList<Resource>
+            AppDatabase(context).getResourceDao().getResources() as ArrayList<DbResource>
     }
 
-
-    object Mappers {
-
-        fun mapDbToEstimateResource(dbResources: List<Resource>?): List<EstimateResource> {
-            val result = ArrayList<EstimateResource>()
-
-            dbResources?.forEach {
-                result.add(
-                    EstimateResource(
-                        it.objectId,
-                        it.name,
-                        when (it.type) {
-                            ResType.MATERIAL.ordinal -> ResType.MATERIAL
-                            else -> ResType.TOOL
-                        },
-                        when (it.units) {
-                            Units.KG.ordinal -> Units.KG
-                            Units.L.ordinal -> Units.L
-                            Units.M.ordinal -> Units.M
-                            Units.M2.ordinal -> Units.M2
-                            else -> Units.PIECE
-                        },
-                        it.price
-                    )
-                )
-            }
-
-            return result
-        }
-
-        fun mapDbToEstimateJob(dbJobs: List<Job>?): List<EstimateJob> {
-            val result = ArrayList<EstimateJob>()
-
-            dbJobs?.forEach {
-                result.add(
-                    EstimateJob(
-                        it.objectId,
-                        it.name,
-                        getResourceConsumptionAsPairList(it.resources, it.resourcesRates),
-                        when (it.surface) {
-                            JobSurface.FLOOR.ordinal -> JobSurface.FLOOR
-                            JobSurface.WALLS.ordinal -> JobSurface.WALLS
-                            JobSurface.CEILING.ordinal -> JobSurface.CEILING
-                            JobSurface.OPENING.ordinal -> JobSurface.OPENING
-                            else -> JobSurface.ALL
-                        },
-                        when (it.type) {
-                            JobType.PAINTING.ordinal -> JobType.PAINTING
-                            JobType.TILING.ordinal -> JobType.TILING
-                            JobType.PASTING.ordinal -> JobType.PASTING
-                            JobType.FLATTENING.ordinal -> JobType.FLATTENING
-                            JobType.MOUNTING.ordinal -> JobType.MOUNTING
-                            else -> JobType.OTHER
-                        },
-                        it.workflow.split("\n"),
-                        it.price
-                    )
-                )
-            }
-
-            return result
-        }
-
-        private fun getResourceConsumptionAsPairList(res: String, rate: String): List<Pair<EstimateResource, Double>> {
-            val result = ArrayList<Pair<EstimateResource, Double>>()
-
-            val resources = res.split("\n")
-            val resRate = rate.split("\n")
-
-            for (index: Int in resources.indices) {
-                result.add(
-                    Pair(
-                        Repository.getResourceByID(resources[index]),
-                        resRate[index].toDouble()
-                    )
-                )
-            }
-
-            return result
-        }
-
-        fun mapNetToDbResource(resourceResponse: List<ResourceResponse>?): List<Resource> {
-            val result = ArrayList<Resource>()
-
-            resourceResponse?.forEach {
-                result.add(
-                    Resource(
-                        it.name,
-                        it.objectId,
-                        it.type,
-                        it.units,
-                        0.0,
-                        if (it.updated == 0L) it.created else it.updated
-                    )
-                )
-            }
-
-            return result
-        }
-
-        fun mapNetToDbJob(jobResponse: List<JobResponse>?): List<Job> {
-            val result = ArrayList<Job>()
-
-            jobResponse?.forEach {
-
-                val resourceConsumptionAsStrings = getResourceConsumptionAsStrings(it.resources)
-
-                result.add(
-                    Job(
-                        it.created,
-                        it.name,
-                        it.objectId,
-                        resourceConsumptionAsStrings.first,
-                        resourceConsumptionAsStrings.second,
-                        it.surface,
-                        it.type,
-                        it.updated,
-                        it.workflow,
-                        0.0
-                    )
-                )
-            }
-
-            return result
-        }
-
-        private fun getResourceConsumptionAsStrings(resourceConsumptions: List<JobResponse.ResourceConsumption>): Pair<String, String> {
-            val result1 = StringBuilder()
-            val result2 = StringBuilder()
-
-            resourceConsumptions.forEach {
-                result1.append(it.resource).append("\n")
-                result2.append(it.rate).append("\n")
-            }
-
-            result1.deleteCharAt(result1.lastIndex)
-            result2.deleteCharAt(result2.lastIndex)
-
-            return (result1.toString()) to (result2.toString())
-        }
+    private fun loadEstimatesFromDb(context: Context) = CoroutineScope(Dispatchers.IO).launch {
+        dBEstimates = AppDatabase(context).getEstimateDao().getEstimates() as ArrayList<DbEstimate>
     }
 }

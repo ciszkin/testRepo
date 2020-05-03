@@ -4,36 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.JobsFragment">
+    tools:context=".ui.fragments.jobslist.JobsListFragment">
 
     <TextView
-        android:id="@+id/jobsText"
+        android:id="@+id/sortJobsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/sort_label"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/sortJobsBy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sortJobsBy" />
+
+    <Spinner
+        android:id="@+id/sortJobsBy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sortJobsLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/jobsRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:scrollbars="vertical"
-        android:text="@string/loading_data"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/jobsLoadingBar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/jobsText"
-        app:layout_constraintEnd_toEndOf="@+id/jobsText"
-        app:layout_constraintStart_toStartOf="@+id/jobsText"
-        app:layout_constraintTop_toTopOf="@+id/jobsText" />
-
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortJobsBy" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,106 @@
 <resources>
     <string name="app_name">Basic App</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <!-- titles -->
+    <string name="search_list_menu_item_title">Найти</string>
+    <string name="estimates_list_menu_item_title">Сметы</string>
+    <string name="jobs_list_menu_item_title">Работы</string>
+    <string name="resources_list_menu_item_title">Ресурсы</string>
+    <string name="settings_menu_item_title">Настройки</string>
+    <string name="job_card_title">Карточка работы</string>
+    <string name="estimate_card_title">Карточка сметы</string>
+    <string name="jobs_list_title">Список работ</string>
+    <string name="resources_list_title">Список материалов</string>
+    <string name="new_estimate_title">Новая смета</string>
+    <string name="new_job_title">Новая работа</string>
+    <string name="new_resource_title">Новый ресурс</string>
+    <!-- labels -->
+    <string name="needed_resources_label">Потребные ресурсы:</string>
+    <string name="workflow_label">Состав работ</string>
+    <string name="deadline_label">Дата окончания</string>
+    <string name="add_job_to_estimate_label">Добавить работу в смету: </string>
+    <string name="input_job_amount_label">Введите объем работ в </string>
+    <string name="input_resource_consumption_label">Введите расход ресурса в </string>
+    <string name="completed_label">Выполнено</string>
+    <string name="month_label">Месяц</string>
+    <string name="year_label">Год</string>
+    <string name="day_label">День</string>
+    <string name="calculation_label">Расчет стоимости</string>
+    <string name="total_jobs_count_label">Всего работ:</string>
+    <string name="total_resources_count_label">Всего ресурсов:</string>
+    <string name="total_labor_cost_label">труда:</string>
+    <string name="total_resources_cost_label">ресурсов:</string>
+    <string name="total_cost_label">Всего:</string>
+    <string name="by_estimate_label">По смете</string>
+    <string name="new_estimate_name_label">Название сметы</string>
+    <string name="new_estimate_deadline_label">Дата окончания</string>
+    <string name="note_label">Примечание</string>
+    <string name="cost_label">Стоимость</string>
+    <string name="amount_label">Количество</string>
+    <string name="email_label">Адрес электронной почты</string>
+    <string name="name_label">Имя</string>
+    <string name="password_label">Пароль</string>
+    <!-- buttons -->
+    <string name="add_to_estimate_button">Add to estimate</string>
+    <string name="hide_button">Hide</string>
+    <string name="next_button">Next</string>
+    <string name="previous_button">Previous</string>
+    <string name="create_estimate_button">Создать смету</string>
+    <string name="calc_button">Расчет</string>
+    <string name="show_jobs_button">Работы</string>
+    <string name="show_resources_button">Ресурсы</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="ok_button">Ок</string>
+    <string name="register_button">Зарегистрироваться</string>
+    <string name="close_button">Закрыть</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="estimates_menu_item_title">Estimates</string>
-    <string name="jobs_menu_item_title">Jobs</string>
-    <string name="resources_menu_item_title">Resources</string>
-    <string name="settings_menu_item_title">Settings</string>
-    <string name="loading_data">Loading data...</string>
+    <!-- preferences -->
+    <string name="preference_file_key">by.ciszkin.basicapp.preferences</string>
+    <string name="user_name">userName</string>
+    <string name="user_email">userEmail</string>
+    <string name="user_password">userPassword</string>
+    <string name="user_token">userToken</string>
+
+    <!-- error messages -->
+    <string name="empty_login_error">Email can\'t be empty!</string>
+    <string name="empty_password_error">Password can\'t be empty!</string>
+    <string name="empty_name_error">Name can\'t be empty!</string>
+    <string name="empty_estimate_title_error">Введите название сметы!</string>
+    <string name="empty_estimate_deadline_error">Введите дату окончания!</string>
+
+    <!-- other -->
+    <string name="loading_data">Loading data…</string>
+    <string name="currency">\ BYN</string>
+    <string name="per"> / </string>
+    <string name="fill_the_fields">Заполните все поля:</string>
+    <string name="delete_estimate_dialog_title">Удалить смету?</string>
+    <string name="completed_amount_input_dialog">Выполненный объем работ</string>
+    <string name="current_price_input_dialog">Текущая цена работ</string>
+    <string name="search_hint">Наименование</string>
+    <string name="sort_label">Сортировка:</string>
+    <string name="new_job_name_label">Наименование работы</string>
+    <string name="new_job_surface_label">Место выполнения работы</string>
+    <string name="new_job_type_label">Тип работы</string>
+    <string name="new_job_units_label">Единица измерения</string>
+    <string name="new_job_price_label">Цена за ед.изм.</string>
+    <string name="workflow_button">Состав работ</string>
+    <string name="add_resource_button">Добавить ресурс</string>
+    <string name="create_job_button">Создать работу</string>
+    <string name="empty_job_name_error">Введите название работы!</string>
+    <string name="empty_resource_name_error">Введите название ресурса!</string>
+    <string name="empty_new_job_surface_error">Выберите место проведения работы!</string>
+    <string name="empty_new_job_type_error">Выберите тип работы!</string>
+    <string name="empty_new_job_price_error">Введите цену работы!</string>
+    <string name="empty_units_error">Выберите единицы измерения!</string>
+    <string name="add_resource_to_new_job_label">Добавить материал в новую работу?</string>
+    <string name="new_resource_name_label">Наименование ресурса</string>
+    <string name="resource_type_switch">Тип ресурса</string>
+    <string name="create_resource_button">Создать ресурс</string>
+    <string name="material_label">Материал</string>
+    <string name="tool_label">Механизм</string>
+    <string name="empty_new_resource_price_error">Введите цену ресурса!</string>
+    <string name="pref_user_data_label">Учетные данные</string>
+    <string name="pref_auto_login">autoLogin</string>
+    <string name="login_button">Войти</string>
+    <string name="image_content_descriptor">image</string>
+
 </resources>

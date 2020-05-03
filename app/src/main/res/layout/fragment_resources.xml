@@ -4,36 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ResourcesFragment">
+    tools:context=".ui.fragments.resourceslist.ResourcesListFragment">
 
     <TextView
-        android:id="@+id/resourcesText"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        android:text="@string/loading_data"
-        android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@id/button_third"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/resourcesLoadingBar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/resourcesText"
-        app:layout_constraintEnd_toEndOf="@+id/resourcesText"
-        app:layout_constraintStart_toStartOf="@+id/resourcesText"
-        app:layout_constraintTop_toTopOf="@+id/resourcesText" />
-
-    <Button
-        android:id="@+id/button_third"
+        android:id="@+id/sortResourcesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
         android:layout_margin="8dp"
+        android:text="@string/sort_label"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/sortResourcesBy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sortResourcesBy" />
+
+    <Spinner
+        android:id="@+id/sortResourcesBy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sortResourcesLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resourcesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortResourcesBy" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

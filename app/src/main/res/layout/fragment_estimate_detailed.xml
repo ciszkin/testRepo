@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/list_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/estimateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableEnd="@drawable/ic_edit_icon"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Estimate name" />
+
+        <ImageView
+            android:id="@+id/attentionSign"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/image_content_descriptor"
+            android:background="@drawable/ic_warning_black_24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/estimateDeadline"
+            app:layout_constraintEnd_toStartOf="@+id/estimateDeadline"
+            app:layout_constraintTop_toTopOf="@+id/estimateDeadline" />
+
+        <TextView
+            android:id="@+id/estimateDeadline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableEnd="@drawable/ic_edit_icon"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimateName"
+            tools:text="Estimate deadline" />
+
+        <TextView
+            android:id="@+id/estimateNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableEnd="@drawable/ic_edit_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimateDeadline"
+            tools:text="Estimate note" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/list_shape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <TextView
+            android:id="@+id/calculationLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/calculation_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/jobsCountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/total_jobs_count_label"
+            app:layout_constraintBottom_toBottomOf="@+id/jobsCountValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/jobsCountValue" />
+
+        <TextView
+            android:id="@+id/jobsCountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/showJobsButton"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/showJobsButton"
+            tools:text="Jobs count" />
+
+
+        <Button
+            android:id="@+id/showJobsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/show_jobs_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/calculationLabel" />
+
+        <TextView
+            android:id="@+id/resourcesCountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/total_resources_count_label"
+            app:layout_constraintBottom_toBottomOf="@+id/resourcesCountValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/resourcesCountValue" />
+
+        <TextView
+            android:id="@+id/resourcesCountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/showResourcesButton"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/showResourcesButton"
+            tools:text="Resources count" />
+
+        <Button
+            android:id="@+id/showResourcesButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/show_resources_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/showJobsButton" />
+
+        <TextView
+            android:id="@+id/costLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/cost_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showResourcesButton" />
+
+        <TextView
+            android:id="@+id/byEstimateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/by_estimate_label"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/showResourcesButton" />
+
+        <TextView
+            android:id="@+id/completedLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/completed_label"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/byEstimateLabel"
+            app:layout_constraintTop_toBottomOf="@+id/showResourcesButton" />
+
+        <TextView
+            android:id="@+id/laborCostLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/total_labor_cost_label"
+            app:layout_constraintBottom_toBottomOf="@+id/laborCostValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/laborCostValue" />
+
+        <TextView
+            android:id="@+id/laborCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/byEstimateLabel"
+            tools:text="Labor cost" />
+
+        <TextView
+            android:id="@+id/completedLaborCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@+id/laborCostValue"
+            app:layout_constraintTop_toBottomOf="@+id/byEstimateLabel"
+            tools:text="Labor cost" />
+
+        <TextView
+            android:id="@+id/resourcesCostLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/total_resources_cost_label"
+            app:layout_constraintBottom_toBottomOf="@+id/resourcesCostValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/resourcesCostValue" />
+
+        <TextView
+            android:id="@+id/resourcesCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/laborCostValue"
+            tools:text="Resources cost" />
+
+        <TextView
+            android:id="@+id/completedResourcesCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@+id/resourcesCostValue"
+            app:layout_constraintTop_toBottomOf="@+id/laborCostValue"
+            tools:text="Resources cost" />
+
+        <TextView
+            android:id="@+id/totalCostLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/total_cost_label"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/totalCostValue"
+            app:layout_constraintEnd_toStartOf="@+id/totalCostValue"
+
+            app:layout_constraintTop_toTopOf="@+id/totalCostValue" />
+
+        <TextView
+            android:id="@+id/totalCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/resourcesCostValue"
+            tools:text="Total cost" />
+
+        <TextView
+            android:id="@+id/completedCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/totalCostValue"
+            app:layout_constraintTop_toBottomOf="@+id/resourcesCostValue"
+            tools:text="Completed cost" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="126dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="@string/pref_user_data_label">
+
+        <EditTextPreference
+            app:key="@string/user_name"
+            app:title="@string/name_label" />
+
+        <EditTextPreference
+            app:key="@string/user_email"
+            app:title="@string/email_label"/>
+
+        <EditTextPreference
+            app:key="@string/user_password"
+            app:title="@string/password_label"/>
+
+        <SwitchPreferenceCompat
+            app:key="@string/pref_auto_login"
+            app:title="Автоматический вход"
+            app:summary="Входить в аккаунт автоматически при запуске приложения"/>
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

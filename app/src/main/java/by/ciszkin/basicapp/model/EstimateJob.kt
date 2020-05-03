@@ -1,14 +1,15 @@
 package by.ciszkin.basicapp.model
 
-import by.ciszkin.basicapp.model.enums.JobSurface
-import by.ciszkin.basicapp.model.enums.JobType
-
 data class EstimateJob(
-    val objectId: String,
-    val name: String,
-    val resources: List<Pair<EstimateResource, Double>>,
-    val surface: JobSurface,
-    val type: JobType,
-    val workflow: List<String>,
-    val price: Double
-)
+    val job: RawJob,
+    var amount: Double,
+    var completedAmount: Double,
+    var note: String,
+    var estimatePrice: Double
+) {
+
+
+//    companion object {
+//        var current: EstimateJob? = null
+//    }
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_shape"
+    android:layout_marginBottom="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/estimateResourceImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/image_content_descriptor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@mipmap/ic_launcher" />
+
+
+    <TextView
+        android:id="@+id/estimateResourceNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estimateResourceImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Resource name" />
+
+    <TextView
+        android:id="@+id/estimateResourceCostLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/cost_label"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/estimateResourceCostValue"
+        app:layout_constraintEnd_toStartOf="@+id/estimateResourceCostValue"
+        app:layout_constraintTop_toTopOf="@+id/estimateResourceCostValue" />
+
+    <TextView
+        android:id="@+id/estimateResourceCostValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estimateResourceAmountValue"
+        tools:text="Cost" />
+
+    <TextView
+        android:id="@+id/estimateResourceAmountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/amount_label"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/estimateResourceAmountValue"
+        app:layout_constraintEnd_toStartOf="@+id/estimateResourceAmountValue"
+        app:layout_constraintTop_toTopOf="@+id/estimateResourceAmountValue" />
+
+    <TextView
+        android:id="@+id/estimateResourceAmountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estimateResourceNameLabel"
+        tools:text="Amount" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

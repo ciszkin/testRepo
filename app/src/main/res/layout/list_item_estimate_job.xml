@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/item_shape">
+
+    <ProgressBar
+        android:id="@+id/jobProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:layout_margin="8dp"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estimateJobResourceImage"
+        app:layout_constraintTop_toBottomOf="@+id/estimateJobTitleLabel" />
+
+    <ImageView
+        android:id="@+id/estimateJobResourceImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/image_content_descriptor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/estimateJobSurfaceImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/image_content_descriptor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estimateJobResourceImage"
+        tools:background="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/estimateJobTitleLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estimateJobResourceImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Estimate job name" />
+
+    <TextView
+        android:id="@+id/estimateJobCostValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobProgressBar"
+        tools:text="Cost" />
+
+    <TextView
+        android:id="@+id/estimateJobAmountValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/estimateJobCostValue"
+        app:layout_constraintTop_toBottomOf="@+id/jobProgressBar"
+        tools:text="Amount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

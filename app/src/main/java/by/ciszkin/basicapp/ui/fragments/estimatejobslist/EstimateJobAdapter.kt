@@ -1,5 +1,6 @@
 package by.ciszkin.basicapp.ui.fragments.estimatejobslist
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,7 @@ class EstimateJobAdapter(val list:MutableList<EstimateJob>) : RecyclerView.Adapt
                 val editCompletedAmount = EditText(this.context)
                 editCompletedAmount.apply{
                     setRawInputType(2002)
+                    setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_build_black_24dp, 0, 0, 0)
                     isSingleLine = true
                     text.append(item.completedAmount.round(Utils.amountAccuracy).toString())
                     hint = "Введите объем работ в " + item.job.units.title
@@ -65,6 +67,7 @@ class EstimateJobAdapter(val list:MutableList<EstimateJob>) : RecyclerView.Adapt
                 val editPrice = EditText(this.context)
                 editPrice.apply{
                     setRawInputType(2002)
+                    setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_monetization_on_black_24dp, 0, 0, 0)
                     isSingleLine = true
                     text.append(item.estimatePrice.round(Utils.amountAccuracy).toString())
                     hint = "Введите новую цену в " + context.getString(R.string.currency)

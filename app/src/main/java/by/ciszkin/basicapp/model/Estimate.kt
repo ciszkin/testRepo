@@ -196,6 +196,7 @@ class Estimate() {
 
         val list = ArrayList<Estimate>()
         var current: Estimate? = null
+        val deletionList = ArrayList<Estimate>()
 
         fun getTotalJobCostPerUnit(job: EstimateJob): Double {
 

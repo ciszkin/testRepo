@@ -33,7 +33,7 @@
             android:layout_height="20dp"
             android:layout_margin="8dp"
             android:contentDescription="@string/image_content_descriptor"
-            android:background="@drawable/ic_warning_black_24dp"
+            android:background="@drawable/ic_warning_red_24dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/estimateDeadline"
             app:layout_constraintEnd_toStartOf="@+id/estimateDeadline"

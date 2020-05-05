@@ -14,6 +14,7 @@ data class RawResource(
     companion object {
         val list = ArrayList<RawResource>()
         val current = MutableLiveData<Pair<RawResource, Double>>()
+        var needToAddResourceToNewJob = false
     }
 
     enum class SortBy (private val title: String) {

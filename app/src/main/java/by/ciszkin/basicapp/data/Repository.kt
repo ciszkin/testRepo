@@ -62,6 +62,19 @@ object Repository : EstimateRepository{
             .addEstimates(Mappers.mapEstimateToDbEstimate(estimates))
     }
 
+    override fun deleteEstimates(context: Context, estimates: List<Estimate>) {
+        AppDatabase(context).getEstimateDao().deleteEstimates(Mappers.mapEstimateToDbEstimate(estimates))
+    }
+
+    override fun updateEstimates(
+        context: Context,
+        estimatesToSave: List<Estimate>,
+        estimatesToDelete: List<Estimate>
+    ) {
+        AppDatabase(context).getEstimateDao().addEstimates(Mappers.mapEstimateToDbEstimate(estimatesToSave))
+        AppDatabase(context).getEstimateDao().deleteEstimates(Mappers.mapEstimateToDbEstimate(estimatesToDelete))
+    }
+
     override fun loadDataAsync(context: Context) = CoroutineScope(Dispatchers.IO).async {
 
         if (resources.isEmpty()) {

@@ -52,10 +52,15 @@ class NewJobViewModel : ViewModel() {
             listOf(""),
             jobPrice.value!!
             ))
+        RawResource.needToAddResourceToNewJob = false
     }
 
     override fun onCleared() {
         RawResource.current.removeObserver(resourceObserver)
         super.onCleared()
+    }
+
+    fun setResourceNeed() {
+        RawResource.needToAddResourceToNewJob = true
     }
 }

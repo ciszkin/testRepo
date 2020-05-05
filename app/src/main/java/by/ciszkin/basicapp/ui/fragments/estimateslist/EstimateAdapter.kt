@@ -56,7 +56,7 @@ class EstimateAdapter(val list: MutableList<Estimate>) :
 
             setOnLongClickListener {
                 MaterialAlertDialogBuilder(this.context)
-                    .setTitle(context.getString(R.string.delete_estimate_dialog_title))
+                    .setTitle(context.getString(R.string.delete_estimate_dialog_label))
                     .setMessage(
                         item.title + item.getCompletedCost()
                             .round(Utils.costAccuracy) + context.getString(R.string.per) + item.getTotalCost()
@@ -65,6 +65,7 @@ class EstimateAdapter(val list: MutableList<Estimate>) :
                     .setIcon(R.drawable.ic_delete_black_24dp)
                     .setPositiveButton(R.string.ok_button) { _, _ ->
                         Estimate.list.remove(item)
+                        Estimate.deletionList.add(item)
                         Estimate.current = null
                         notifyItemRemoved(position)
                     }

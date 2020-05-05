@@ -9,8 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 object NetworkService {
-    private const val APPLICATION_ID = "****************"
-    private const val REST_API_KEY = "***************"
+    private const val APPLICATION_ID = "CEC9A86A-599B-62C8-FFCA-E49B5F966200"
+    private const val REST_API_KEY = "97AD0BF1-8EF1-4C2D-AA9E-B6BE3136BFD6"
     private const val BASE_URL = "https://api.backendless.com/$APPLICATION_ID/$REST_API_KEY/"
     private const val KEY_NAME = "user-token"
 

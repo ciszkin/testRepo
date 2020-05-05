@@ -8,6 +8,8 @@ interface EstimateRepository {
     fun getRawJobs() : ArrayList<RawJob>
     fun getEstimates() : ArrayList<Estimate>
     fun saveEstimates(context: Context, estimates: List<Estimate>)
+    fun deleteEstimates(context: Context, estimates: List<Estimate>)
+    fun updateEstimates(context: Context, estimatesToSave: List<Estimate>, estimatesToDelete: List<Estimate>)
     fun loadDataAsync(context: Context) : Deferred<Boolean>
     fun getJobById(id: String) : RawJob
     fun getResourceById(id: String) : RawResource

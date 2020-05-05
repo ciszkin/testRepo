@@ -151,6 +151,7 @@ class NewJobFragment : Fragment(), View.OnClickListener {
                 }
             }
             newJobAddResourceButton.id -> {
+                model.setResourceNeed()
                 findNavController().navigate(R.id.resourcesListFragment)
             }
             newJobWorkflowButton.id -> {

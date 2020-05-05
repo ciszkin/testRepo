@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.main.MainActivity">
+
+    <item
+        android:id="@+id/estimatesListFragment"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_estimate_icon"
+        android:title="@string/estimates_list_menu_item_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/jobsListFragment"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_job_icon"
+        android:title="@string/jobs_list_menu_item_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/resourcesListFragment"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_resource_icon"
+        android:title="@string/resources_list_menu_item_title"
+        app:showAsAction="never" />
+
+</menu>

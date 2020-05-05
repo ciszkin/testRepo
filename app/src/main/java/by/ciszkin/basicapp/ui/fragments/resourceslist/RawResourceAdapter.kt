@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.ciszkin.basicapp.R
-import by.ciszkin.basicapp.model.RawJob
 import by.ciszkin.basicapp.model.RawResource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.list_item_resources.view.*
@@ -43,12 +41,12 @@ class RawResourceAdapter(private val list: MutableList<RawResource>, private val
             resourceImage.setImageResource(item.type.icon)
 
             setOnClickListener {
-                if (RawJob.current.value != null) {
+                if (RawResource.needToAddResourceToNewJob) {
                     val editConsumption = EditText(this.context)
                     editConsumption.apply {
                         setRawInputType(2002)
                         isSingleLine = true
-                        hint = context.getString(R.string.input_job_amount_label)
+                        hint = context.getString(R.string.input_resource_consumption_label) + item.units.title
                     }
 
                     MaterialAlertDialogBuilder(this.context)

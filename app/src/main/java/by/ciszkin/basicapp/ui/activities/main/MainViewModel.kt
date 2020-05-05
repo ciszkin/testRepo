@@ -18,17 +18,13 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application, private val repository: EstimateRepository) : AndroidViewModel(application) {
 
-//    val currentRawJob = MutableLiveData<RawJob>()
-//    val currentEstimateJob = MutableLiveData<EstimateJob>()
-//    val currentEstimate = MutableLiveData<Estimate>()
-
     val currentFragmentName = MutableLiveData(R.string.estimates_list_menu_item_title)
     val currentFabVisibility = MutableLiveData(View.VISIBLE)
     val currentFabIcon = MutableLiveData(R.drawable.ic_new_estimate_icon)
 
 
-    fun saveDataToDb() = CoroutineScope(Dispatchers.IO).launch {
+    fun updateDbData() = CoroutineScope(Dispatchers.IO).launch {
         val context = getApplication<Application>().applicationContext
-        repository.saveEstimates(context, Estimate.list)
+        repository.updateEstimates(context, Estimate.list, Estimate.deletionList)
     }
 }

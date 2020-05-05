@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import by.ciszkin.basicapp.R
 import by.ciszkin.basicapp.data.Repository
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,9 +40,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
         fab.setOnClickListener(this)
 
-        model = ViewModelProvider(this, MainViewModelFactory(application, Repository)).get(MainViewModel::class.java)
-
         navHostFragment.childFragmentManager.addOnBackStackChangedListener(this)
+
+        bottomNav.setupWithNavController(navHostFragment.findNavController())
+
+        model = ViewModelProvider(this, MainViewModelFactory(application, Repository)).get(MainViewModel::class.java)
 
         model.currentFragmentName.observe(this, Observer{
             this.title = getString(it)
@@ -83,20 +86,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onStop() {
         super.onStop()
-        model.saveDataToDb()
+        model.updateDbData()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.actionEstimates -> {
+            R.id.estimatesListFragment -> {
                 navHostFragment.findNavController().navigate(R.id.estimatesListFragment)
                 true
             }
-            R.id.actionJobs -> {
+            R.id.jobsListFragment -> {
                 navHostFragment.findNavController().navigate(R.id.jobsListFragment)
                 true
             }
-            R.id.actionResources -> {
+            R.id.resourcesListFragment -> {
                 navHostFragment.findNavController().navigate(R.id.resourcesListFragment)
                 true
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Basic App</string>
+    <string name="app_name">Карманный сметчик</string>
     <!-- titles -->
     <string name="search_list_menu_item_title">Найти</string>
     <string name="estimates_list_menu_item_title">Сметы</string>
@@ -9,10 +9,11 @@
     <string name="job_card_title">Карточка работы</string>
     <string name="estimate_card_title">Карточка сметы</string>
     <string name="jobs_list_title">Список работ</string>
-    <string name="resources_list_title">Список материалов</string>
+    <string name="resources_list_title">Список ресурсов</string>
     <string name="new_estimate_title">Новая смета</string>
     <string name="new_job_title">Новая работа</string>
     <string name="new_resource_title">Новый ресурс</string>
+
     <!-- labels -->
     <string name="needed_resources_label">Потребные ресурсы:</string>
     <string name="workflow_label">Состав работ</string>
@@ -39,6 +40,20 @@
     <string name="email_label">Адрес электронной почты</string>
     <string name="name_label">Имя</string>
     <string name="password_label">Пароль</string>
+    <string name="sort_label">Сортировка:</string>
+    <string name="new_job_name_label">Наименование работы</string>
+    <string name="new_job_surface_label">Место выполнения работы</string>
+    <string name="new_job_type_label">Тип работы</string>
+    <string name="new_job_units_label">Единица измерения</string>
+    <string name="new_job_price_label">Цена за ед.изм.</string>
+    <string name="add_resource_to_new_job_label">Добавить материал в новую работу?</string>
+    <string name="new_resource_name_label">Наименование ресурса</string>
+    <string name="material_label">Материал</string>
+    <string name="tool_label">Механизм</string>
+    <string name="delete_estimate_dialog_label">Удалить смету?</string>
+    <string name="completed_amount_input_dialog_label">Выполненный объем работ</string>
+    <string name="current_price_input_dialog_label">Текущая цена работ</string>
+
     <!-- buttons -->
     <string name="add_to_estimate_button">Add to estimate</string>
     <string name="hide_button">Hide</string>
@@ -52,6 +67,12 @@
     <string name="ok_button">Ок</string>
     <string name="register_button">Зарегистрироваться</string>
     <string name="close_button">Закрыть</string>
+    <string name="add_resource_button">Добавить ресурс</string>
+    <string name="create_job_button">Создать работу</string>
+    <string name="login_button">Войти</string>
+    <string name="workflow_button">Состав работ</string>
+    <string name="resource_type_switch">Тип ресурса</string>
+    <string name="create_resource_button">Создать ресурс</string>
 
     <!-- preferences -->
     <string name="preference_file_key">by.ciszkin.basicapp.preferences</string>
@@ -59,6 +80,8 @@
     <string name="user_email">userEmail</string>
     <string name="user_password">userPassword</string>
     <string name="user_token">userToken</string>
+    <string name="pref_user_data_label">Учетные данные</string>
+    <string name="pref_auto_login">autoLogin</string>
 
     <!-- error messages -->
     <string name="empty_login_error">Email can\'t be empty!</string>
@@ -66,41 +89,20 @@
     <string name="empty_name_error">Name can\'t be empty!</string>
     <string name="empty_estimate_title_error">Введите название сметы!</string>
     <string name="empty_estimate_deadline_error">Введите дату окончания!</string>
-
-    <!-- other -->
-    <string name="loading_data">Loading data…</string>
-    <string name="currency">\ BYN</string>
-    <string name="per"> / </string>
-    <string name="fill_the_fields">Заполните все поля:</string>
-    <string name="delete_estimate_dialog_title">Удалить смету?</string>
-    <string name="completed_amount_input_dialog">Выполненный объем работ</string>
-    <string name="current_price_input_dialog">Текущая цена работ</string>
-    <string name="search_hint">Наименование</string>
-    <string name="sort_label">Сортировка:</string>
-    <string name="new_job_name_label">Наименование работы</string>
-    <string name="new_job_surface_label">Место выполнения работы</string>
-    <string name="new_job_type_label">Тип работы</string>
-    <string name="new_job_units_label">Единица измерения</string>
-    <string name="new_job_price_label">Цена за ед.изм.</string>
-    <string name="workflow_button">Состав работ</string>
-    <string name="add_resource_button">Добавить ресурс</string>
-    <string name="create_job_button">Создать работу</string>
     <string name="empty_job_name_error">Введите название работы!</string>
     <string name="empty_resource_name_error">Введите название ресурса!</string>
     <string name="empty_new_job_surface_error">Выберите место проведения работы!</string>
     <string name="empty_new_job_type_error">Выберите тип работы!</string>
     <string name="empty_new_job_price_error">Введите цену работы!</string>
     <string name="empty_units_error">Выберите единицы измерения!</string>
-    <string name="add_resource_to_new_job_label">Добавить материал в новую работу?</string>
-    <string name="new_resource_name_label">Наименование ресурса</string>
-    <string name="resource_type_switch">Тип ресурса</string>
-    <string name="create_resource_button">Создать ресурс</string>
-    <string name="material_label">Материал</string>
-    <string name="tool_label">Механизм</string>
     <string name="empty_new_resource_price_error">Введите цену ресурса!</string>
-    <string name="pref_user_data_label">Учетные данные</string>
-    <string name="pref_auto_login">autoLogin</string>
-    <string name="login_button">Войти</string>
+
+    <!-- other -->
+    <string name="loading_data">Loading data…</string>
+    <string name="currency">\ BYN</string>
+    <string name="per"> / </string>
+    <string name="fill_the_fields">Заполните все поля:</string>
+    <string name="search_hint">Наименование</string>
     <string name="image_content_descriptor">image</string>
 
 </resources>
